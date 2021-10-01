@@ -54,8 +54,14 @@ func MakeFactory(ctor Ctor) rt.Factory {
 
 		// the controller.Reconciler uses an internal client to handle
 		// target objects
+		ctx, ddclient := faketargetsinjectionclient.With(ctx, ls.GetDatadogTargetsObjects()...)
+		ctx, awscompclient := faketargetsinjectionclient.With(ctx, ls.GetAWSComprehendTargetsObjects()...)
 		ctx, ossclient := faketargetsinjectionclient.With(ctx, ls.GetAlibabaOSSTargetsObjects()...)
+		ctx, gcsclient := faketargetsinjectionclient.With(ctx, ls.GetGoogleCloudStorageTargetsObjects()...)
+		ctx, gcfsclient := faketargetsinjectionclient.With(ctx, ls.GetGoogleCloudFirestoreTargetsObjects()...)
+		ctx, gcwclient := faketargetsinjectionclient.With(ctx, ls.GetGoogleCloudWorkflowsTargetsObjects()...)
 		ctx, gsclient := faketargetsinjectionclient.With(ctx, ls.GetGoogleSheetTargetsObjects()...)
+		ctx, slackclient := faketargetsinjectionclient.With(ctx, ls.GetSlackTargetsObjects()...)
 		ctx, splunkclient := faketargetsinjectionclient.With(ctx, ls.GetSplunkTargetsObjects()...)
 		ctx, httpclient := faketargetsinjectionclient.With(ctx, ls.GetHTTPTargetsObjects()...)
 		ctx, logzclient := faketargetsinjectionclient.With(ctx, ls.GetLogzTargetObjects()...)
@@ -80,8 +86,13 @@ func MakeFactory(ctor Ctor) rt.Factory {
 
 		// inject reactors from table row
 		for _, reactor := range tr.WithReactors {
-			ossclient.PrependReactor("*", "*", reactor)
+			ddclient.PrependReactor("*", "*", reactor)
+			awscompclient.PrependReactor("*", "*", reactor)
+			gcsclient.PrependReactor("*", "*", reactor)
+			gcfsclient.PrependReactor("*", "*", reactor)
 			gsclient.PrependReactor("*", "*", reactor)
+			ossclient.PrependReactor("*", "*", reactor)
+			slackclient.PrependReactor("*", "*", reactor)
 			splunkclient.PrependReactor("*", "*", reactor)
 			httpclient.PrependReactor("*", "*", reactor)
 			logzclient.PrependReactor("*", "*", reactor)
@@ -92,8 +103,14 @@ func MakeFactory(ctor Ctor) rt.Factory {
 		actionRecorderList := rt.ActionRecorderList{
 			// target clients are merely used here to record status updates,
 			// reconcilers don't create or update targets otherwise.
-			ossclient,
+			ddclient,
+			awscompclient,
+			gcsclient,
+			gcfsclient,
+			gcwclient,
 			gsclient,
+			ossclient,
+			slackclient,
 			splunkclient,
 			httpclient,
 			logzclient,

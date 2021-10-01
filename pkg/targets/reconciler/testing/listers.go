@@ -77,8 +77,38 @@ func (l *Listers) GetAlibabaOSSTargetsObjects() []runtime.Object {
 	return l.sorter.ObjectsForSchemeFunc(faketargetsclient.AddToScheme)
 }
 
+// GetDatadogTargetsObjects returns objects from the targets API.
+func (l *Listers) GetDatadogTargetsObjects() []runtime.Object {
+	return l.sorter.ObjectsForSchemeFunc(faketargetsclient.AddToScheme)
+}
+
+// GetGoogleCloudStorageTargetsObjects returns objects from the targets API.
+func (l *Listers) GetGoogleCloudStorageTargetsObjects() []runtime.Object {
+	return l.sorter.ObjectsForSchemeFunc(faketargetsclient.AddToScheme)
+}
+
+// GetAWSComprehendTargetsObjects returns objects from the targets API.
+func (l *Listers) GetAWSComprehendTargetsObjects() []runtime.Object {
+	return l.sorter.ObjectsForSchemeFunc(faketargetsclient.AddToScheme)
+}
+
+// GetGoogleCloudFirestoreTargetsObjects returns objects from the targets API.
+func (l *Listers) GetGoogleCloudFirestoreTargetsObjects() []runtime.Object {
+	return l.sorter.ObjectsForSchemeFunc(faketargetsclient.AddToScheme)
+}
+
+// GetGoogleCloudWorkflowsTargetsObjects returns objects from the targets API.
+func (l *Listers) GetGoogleCloudWorkflowsTargetsObjects() []runtime.Object {
+	return l.sorter.ObjectsForSchemeFunc(faketargetsclient.AddToScheme)
+}
+
 // GetGoogleSheetTargetsObjects returns objects from the targets API.
 func (l *Listers) GetGoogleSheetTargetsObjects() []runtime.Object {
+	return l.sorter.ObjectsForSchemeFunc(faketargetsclient.AddToScheme)
+}
+
+// GetSlackTargetsObjects returns objects from the targets API.
+func (l *Listers) GetSlackTargetsObjects() []runtime.Object {
 	return l.sorter.ObjectsForSchemeFunc(faketargetsclient.AddToScheme)
 }
 
@@ -112,14 +142,44 @@ func (l *Listers) GetServingObjects() []runtime.Object {
 	return l.sorter.ObjectsForSchemeFunc(fakeservingclient.AddToScheme)
 }
 
-// GetAlibabaOSSTargetLister returns a Lister for GoogleSheetTarget objects.
+// GetAlibabaOSSTargetLister returns a Lister for AlibabaOSSTarget objects.
 func (l *Listers) GetAlibabaOSSTargetLister() targetslisters.AlibabaOSSTargetLister {
 	return targetslisters.NewAlibabaOSSTargetLister(l.IndexerFor(&targetsv1alpha1.AlibabaOSSTarget{}))
+}
+
+// GetDatadogTargetLister returns a Lister for GoogleSheetTarget objects.
+func (l *Listers) GetDatadogTargetLister() targetslisters.DatadogTargetLister {
+	return targetslisters.NewDatadogTargetLister(l.IndexerFor(&targetsv1alpha1.DatadogTarget{}))
+}
+
+// GetGoogleCloudStorageTargetLister returns a Lister for GoogleCloudStorageTarget objects.
+func (l *Listers) GetGoogleCloudStorageTargetLister() targetslisters.GoogleCloudStorageTargetLister {
+	return targetslisters.NewGoogleCloudStorageTargetLister(l.IndexerFor(&targetsv1alpha1.GoogleCloudStorageTarget{}))
+}
+
+// GetAWSComprehendTargetLister returns a Lister for GoogleSheetTarget objects.
+func (l *Listers) GetAWSComprehendTargetLister() targetslisters.AWSComprehendTargetLister {
+	return targetslisters.NewAWSComprehendTargetLister(l.IndexerFor(&targetsv1alpha1.AWSComprehendTarget{}))
+}
+
+// GetGoogleCloudFirestoreTargetLister returns a Lister for GoogleSheetTarget objects.
+func (l *Listers) GetGoogleCloudFirestoreTargetLister() targetslisters.GoogleCloudFirestoreTargetLister {
+	return targetslisters.NewGoogleCloudFirestoreTargetLister(l.IndexerFor(&targetsv1alpha1.GoogleCloudFirestoreTarget{}))
+}
+
+// GetGoogleCloudWorkflowsTargetLister returns a Lister for GoogleCloudWorkflowsTarget objects.
+func (l *Listers) GetGoogleCloudWorkflowsTargetLister() targetslisters.GoogleCloudWorkflowsTargetLister {
+	return targetslisters.NewGoogleCloudWorkflowsTargetLister(l.IndexerFor(&targetsv1alpha1.GoogleCloudWorkflowsTarget{}))
 }
 
 // GetGoogleSheetTargetLister returns a Lister for GoogleSheetTarget objects.
 func (l *Listers) GetGoogleSheetTargetLister() targetslisters.GoogleSheetTargetLister {
 	return targetslisters.NewGoogleSheetTargetLister(l.IndexerFor(&targetsv1alpha1.GoogleSheetTarget{}))
+}
+
+// GetSlackTargetLister returns a Lister for SplunkTarget objects.
+func (l *Listers) GetSlackTargetLister() targetslisters.SlackTargetLister {
+	return targetslisters.NewSlackTargetLister(l.IndexerFor(&targetsv1alpha1.SlackTarget{}))
 }
 
 // GetSplunkTargetLister returns a Lister for SplunkTarget objects.
